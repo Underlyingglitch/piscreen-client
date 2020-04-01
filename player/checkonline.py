@@ -1,5 +1,4 @@
-import socket
-import time
+import socket, time, os
 
 def internet(host="8.8.8.8", port=53, timeout=3):
   try:
@@ -16,3 +15,4 @@ while True:
         print('Online')
     else:
         print('Offline')
+        os.system('chromium-browser --kiosk /home/pi/piscreen-client/dist/pages/noconn.html')
