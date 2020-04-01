@@ -12,6 +12,10 @@
         background: #333;
       }
 
+      .logo {
+        width: 400px;
+      }
+
       .title {
         font-family: Roboto;
         font-size: 60px;
@@ -30,14 +34,32 @@
         left: 50%;
         transform: translateX(-50%) translateY(-50%);
       }
+
+      .col {
+        width: 50%;
+      }
+
+      .col-left {
+        align: left;
+        float: left;
+      }
+
+      .col-right {
+        align: right;
+        float: right;
+      }
     </style>
 
   </head>
   <body>
     <div class="main" align="center">
-      <img src="img/logo_piscreen.png">
-      <p class="text">IP: xxx.xxx.x.xx</p>
-      <p class="text">Code: ######</p>
+      <div class="col col-left">
+        <img class="logo" src="img/logo_piscreen.png">
+      </div>
+      <div class="col col-right">
+        <p class="text">IP: xxx.xxx.x.xx</p>
+        <p class="text">Code: ######</p>
+      </div>
     </div>
   </body>
 </html>
