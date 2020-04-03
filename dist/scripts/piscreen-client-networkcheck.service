@@ -4,7 +4,7 @@ After=multi-user.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/python /home/pi/piscreen-client/player/checkonline.py
+ExecStart=/usr/bin/python /home/pi/piscreen-client/player/networkcheck.py
 Restart=on-abort
 
 [Install]

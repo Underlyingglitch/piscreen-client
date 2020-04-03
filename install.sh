@@ -21,7 +21,7 @@ apt-get -y purge apache2
 echo "Creating startup scripts"
 mv dist/scripts/piscreen-client-networkcheck.service /lib/systemd/system/piscreen-client-networkcheck.service
 chmod 644 /lib/systemd/system/piscreen-client-networkcheck.service
-chmod +x /home/pi/piscreen-client/player/checkonline.py
+chmod +x /home/pi/piscreen-client/player/networkcheck.py
 
 echo "Reloading startup sequence"
 systemctl daemon-reload
