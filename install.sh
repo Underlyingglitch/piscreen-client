@@ -25,7 +25,7 @@ raspi-config nonint do_memory_split 256
 
 echo "Setting timezone"
 rm /etc/localtime
-ln /usr/share/soneinfo/Europe/Amsterdam /etc/localtime
+ln /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime
 
 echo "Removing unnessesary packages"
 apt -y autoremove
