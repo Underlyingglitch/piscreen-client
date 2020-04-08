@@ -7,16 +7,6 @@ if [[ $EUID -ne 0 ]]; then
   exit 1
 fi
 
-echo "Setting raspi-config variables"
-raspi-config nonint do_hostname piscreenclient
-raspi-config nonint do_boot_behaviour B4
-raspi-config nonint do_overscan 0
-raspi-config nonint do_memory_split 256
-
-echo "Setting timezone"
-rm /etc/localtime
-ln /usr/share/soneinfo/Europe/Amsterdam /etc/localtime
-
 echo "Installing packages"
 apt-get -y update
 apt-get -y install php
@@ -26,6 +16,16 @@ apt-get -y install pix-plym-splash
 apt-get -y install --no-install-recommends xserver-xorg x11-xserver-utils xinit openbox
 apt-get -y install --no-install-recommends chromium-browser
 apt-get -y install unclutter
+
+echo "Setting raspi-config variables"
+raspi-config nonint do_hostname piscreenclient
+raspi-config nonint do_boot_behaviour B4
+raspi-config nonint do_overscan 0
+raspi-config nonint do_memory_split 256
+
+echo "Setting timezone"
+rm /etc/localtime
+ln /usr/share/soneinfo/Europe/Amsterdam /etc/localtime
 
 echo "Removing unnessesary packages"
 apt -y autoremove
