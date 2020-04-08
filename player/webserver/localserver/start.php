@@ -61,8 +61,8 @@
         <img class="logo" src="img/logo_piscreen.png">
       </div>
       <div class="col col-right">
-        <p class="text">IP: {CLIENT_IP}</p>
-        <p class="text">Code: {AUTH_CODE}</p>
+        <p class="text">IP: <?php echo $client_ip; ?></p>
+        <p class="text">Code: <?php echo $client_sec_code; ?></p>
       </div>
     </div>
   </body>
