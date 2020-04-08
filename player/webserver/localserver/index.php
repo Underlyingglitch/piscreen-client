@@ -1,7 +1,9 @@
 <?php
 
+echo "<div style='display: none'>";
 $response = null;
 system("ping -c 1 google.com", $response);
+echo "</div>";
 if($response == 0) {
   //Getting the local IP address of the server
   $sock = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
