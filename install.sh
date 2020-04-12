@@ -9,14 +9,9 @@ fi
 
 echo "Installing packages"
 apt-get -y update
-apt-get -y install php
-apt-get -y install lightdm
-apt-get -y install plymouth plymouth-themes
-apt-get -y install pix-plym-splash
-apt-get -y install --no-install-recommends xserver-xorg x11-xserver-utils xinit openbox
-apt-get -y install --no-install-recommends chromium-browser
-apt-get -y install unclutter
-apt-get -y install dos2unix
+apt-get -y install php lightdm plymouth plymouth-themes pix-plym-splash
+apt-get -y install --no-install-recommends xserver-xorg x11-xserver-utils xinit openbox chromium-browser
+apt-get -y install unclutter dos2unix
 
 echo "Setting raspi-config variables"
 raspi-config nonint do_hostname piscreenclient
