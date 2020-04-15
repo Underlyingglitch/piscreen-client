@@ -1,5 +1,7 @@
 <?php
 
+header('Access-Control-Allow-Origin: *');
+
 if (isset($_POST['code']) && isset($_POST['name'])) {
   $code = file_get_contents("/home/pi/piscreen-client/dist/data/securitycode");
 
