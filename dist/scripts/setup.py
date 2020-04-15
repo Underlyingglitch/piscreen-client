@@ -1,9 +1,7 @@
 import os
 
-def file_get_contents(filename):
-    with open(filename) as f:
-        return f.read()
+with open('../data/playername') as f:
+    name = f.read()
 
-name = file_get_contents('../data/playername')
-
-print(name)
+os.system('sudo raspi-config nonint do_hostname '+name)
+os.system('sudo reboot')
