@@ -42,7 +42,7 @@
     <div class="main" align="center">
       <i class="fas fa-check-circle fa-7x icon"></i>
       <h1 class="title">Geslaagd</h1>
-      <p class="text">De client heeft verbinding gemaakt de de server: {SERVER_IP}</p>
+      <p class="text">De client heeft verbinding gemaakt met de server: <?php echo $server_ip; ?></p>
     </div>
   </body>
 </html>

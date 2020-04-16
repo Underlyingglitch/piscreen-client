@@ -6,12 +6,13 @@ system("ping -c 1 google.com", $response);
 echo "</div>";
 if($response == 0) {
 
-  if (file_exists("/home/pi/piscreen-client/dist/data/localdata.json")) {
+  if (file_exists("/home/pi/piscreen-client/dist/data/serverconn.json")) {
     //Getting local config file
-    $json = file_get_contents("/home/pi/piscreen-client/dist/data/localdata.json");
+    $json = file_get_contents("/home/pi/piscreen-client/dist/data/serverconn.json");
     $array = json_decode($json);
 
     if ($array['is_loaded'] === 0) {
+      $server_ip = $array['hostname'];
       include "success.php";
     } else {
       include "failed.php";
