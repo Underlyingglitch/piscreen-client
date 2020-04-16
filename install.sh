@@ -61,4 +61,4 @@ systemctl start piscreen-client-localserver.service
 
 echo "Rebooting in 10 seconds"
 sleep 10
-shutdown
+reboot
