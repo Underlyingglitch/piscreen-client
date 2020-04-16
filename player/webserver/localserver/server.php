@@ -1,5 +1,7 @@
 <?php
 
+//TODO: check for existing setup
+
 header('Access-Control-Allow-Origin: *');
 
 if (isset($_POST['code']) && isset($_POST['name'])) {
