@@ -14,7 +14,9 @@ if (isset($_POST['code']) && isset($_POST['name'])) {
     file_put_contents("/home/pi/piscreen-client/dist/data/serverconn.json", json_encode($data));
     echo "success";
     //Removing chromium profile before reboot
-    shell_exec(escapeshellcmd('sudo rm -rf ~/.config/chromium/Singleton*'));
+    shell_exec(escapeshellcmd('sudo rm -rf /home/pi/.config/chromium/SingletonCookie'));
+    shell_exec(escapeshellcmd('sudo rm -rf /home/pi/.config/chromium/SingletonLock'));
+    shell_exec(escapeshellcmd('sudo rm -rf /home/pi/.config/chromium/SingletonSocket'));
     shell_exec(escapeshellcmd('sudo reboot'));
   } else {
     echo "Foutieve code ingevoerd!";

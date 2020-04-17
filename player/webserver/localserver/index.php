@@ -9,7 +9,7 @@ if($response == 0) {
   if (file_exists("/home/pi/piscreen-client/dist/data/serverconn.json")) {
     //Getting local config file
     $json = file_get_contents("/home/pi/piscreen-client/dist/data/serverconn.json");
-    $array = json_decode($json);
+    $array = json_decode($json, true);
 
     if ($array['is_loaded'] === 0) {
       $server_ip = $array['hostname'];
@@ -25,7 +25,7 @@ if($response == 0) {
 
     //Security code
     //Check if code is present
-    if (file_exists("/home/pi/piscreen-client/dist/data/securitycode")) {
+    if (file_get_contents("/home/pi/piscreen-client/dist/data/securitycode") != "") {
       //Get code from file and display to page
       $code = file_get_contents("/home/pi/piscreen-client/dist/data/securitycode");
     } else {
