@@ -49,8 +49,11 @@ dos2unix /etc/xdg/openbox/autostart
 
 echo "Creating services"
 mv dist/scripts/piscreen-client-localserver.service /lib/systemd/system/piscreen-client-localserver.service
+mv dist/scripts/piscreen-client-apiserver.service /lib/systemd/system/piscreen-client-apiserver.service
 chmod 644 /lib/systemd/system/piscreen-client-localserver.service
+chmod 644 /lib/systemd/system/piscreen-client-apiserver.service
 chmod +x /home/pi/piscreen-client/player/localserver.py
+chmod +x /home/pi/piscreen-client/player/apiserver.py
 
 echo "Reloading startup sequence"
 systemctl daemon-reload
