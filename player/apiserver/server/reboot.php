@@ -19,4 +19,4 @@ shell_exec(escapeshellcmd('sudo rm -rf /home/pi/.config/chromium/SingletonLock')
 shell_exec(escapeshellcmd('sudo rm -rf /home/pi/.config/chromium/SingletonSocket'));
 shell_exec(escapeshellcmd('sudo reboot'));
 
-?>
+?
