@@ -60,7 +60,9 @@ systemctl daemon-reload
 
 echo "Starting services"
 systemctl enable piscreen-client-localserver.service
+systemctl enable piscreen-client-apiserver.service
 systemctl start piscreen-client-localserver.service
+systemctl start piscreen-client-apiserver.service
 
 echo "Rebooting in 10 seconds"
 sleep 10
