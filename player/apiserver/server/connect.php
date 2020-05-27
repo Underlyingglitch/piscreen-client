@@ -11,9 +11,8 @@ include_once '../objects/server.php';
 $server = new Server();
 
 //Get URL data
-$data = json_decode(file_get_contents("php://input"));
-$server->connect_name = htmlspecialchars(stripslashes(strtolower(str_replace(' ', '', $data->name))));
-$server->connect_code = htmlspecialchars(stripslashes($data->code));
+$server->connect_name = htmlspecialchars(stripslashes(strtolower(str_replace(' ', '', $_POST['name']))));
+$server->connect_code = htmlspecialchars(stripslashes($_POST['code']));
 
 if ($server->isCode()) {
   $server->server_location = $_SERVER['REMOTE_ADDR'];
@@ -21,7 +20,7 @@ if ($server->isCode()) {
     //Set response code to 200 OK
     http_response_code(200);
     //Tell the user
-    echo json_encode(array("message" => "Successfully established connection"));
+    echo "success";
   } else {
     //Set response code to 503 Service unavailable
     http_response_code(503);
