@@ -47,6 +47,10 @@ rm /etc/xdg/openbox/autostart
 mv /home/pi/piscreen-client/dist/files/autostart /etc/xdg/openbox/autostart
 dos2unix /etc/xdg/openbox/autostart
 
+echo "Setting up files"
+mkdir /home/pi/piscreen-client/dist/data
+touch /home/pi/piscreen-client/dist/data/securitycode
+
 echo "Creating services"
 mv dist/scripts/piscreen-client-localserver.service /lib/systemd/system/piscreen-client-localserver.service
 mv dist/scripts/piscreen-client-apiserver.service /lib/systemd/system/piscreen-client-apiserver.service
