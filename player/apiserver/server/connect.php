@@ -24,10 +24,10 @@ if ($server->isCode()) {
         <meta charset="utf-8">
         <title>PiScreen - Connected</title>
 
-        <link rel="stylesheet" href="vendor/fontawesome/css/all.css">
+        <link rel="stylesheet" href="../localserver/vendor/fontawesome/css/all.css">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="css/roboto.css">
+        <link rel="stylesheet" href="../localserver/css/roboto.css">
 
         <style>
           body {
