@@ -1,9 +1,5 @@
 <?php
 
-//Required headers
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8");
-
 //Include database and object files
 include_once '../objects/server.php';
 
@@ -20,7 +16,8 @@ if ($server->isCode()) {
     //Set response code to 200 OK
     http_response_code(200);
     //Tell the user
-    $connect = file_get_contents('http://'.$_GET['server'].':31804/connect/confirm.php?client='.$_SERVER['SERVER_ADDR'].'&name='.$_GET['name'].'&code='.$_GET['code']);
+    $thisip = gethostbyname(gethostname());
+    $connect = file_get_contents('http://'.$_GET['server'].':31804/connect/confirm.php?client='.$thisip.'&name='.$_GET['name'].'&code='.$_GET['code']);
     ?>
     <html>
       <head>
@@ -66,16 +63,8 @@ if ($server->isCode()) {
         <div class="main" align="center">
           <i class="fas fa-check-circle fa-7x icon"></i>
           <h1 class="title">Geslaagd</h1>
-          <p class="text">De client heeft verbinding gemaakt met de server: <?php echo $server_ip; ?></p>
+          <p class="text">De client heeft verbinding gemaakt met de server: <?php echo $_GET['server']; ?></p>
         </div>
-
-        <script>
-        fetch("reboot.php", {
-          method: "POST"
-        }).then(res => {
-          console.log("Request complete! response:", res);
-        });
-        </script>
       </body>
     </html>
     <?php
