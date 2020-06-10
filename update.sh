@@ -31,6 +31,10 @@ chmod 644 /lib/systemd/system/piscreen-client-apiserver.service
 chmod +x /home/pi/piscreen-client/player/localserver.py
 chmod +x /home/pi/piscreen-client/player/apiserver.py
 
+echo "Reloading deamon"
+systemctl daemon-reload
+
+echo "Restarting services"
 systemctl enable piscreen-client-localserver.service
 systemctl enable piscreen-client-apiserver.service
 systemctl start piscreen-client-localserver.service
