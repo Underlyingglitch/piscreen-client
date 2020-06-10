@@ -18,6 +18,7 @@ if ($server->isCode()) {
     //Tell the user
     $thisip = gethostbyname(gethostname());
     $connect = file_get_contents('http://'.$_GET['server'].':31804/connect/confirm.php?client='.$_SERVER['SERVER_ADDR'].'&name='.$_GET['name'].'&code='.$_GET['code']);
+    echo $connect;
     ?>
     <html>
       <head>
