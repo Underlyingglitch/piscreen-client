@@ -17,8 +17,19 @@ if ($server->isCode()) {
     http_response_code(200);
     //Tell the user
     $thisip = gethostbyname(gethostname());
-    $connect = file_get_contents('http://'.$_GET['server'].':31804/connect/confirm.php?client='.$_SERVER['SERVER_ADDR'].'&name='.$_GET['name'].'&code='.$_GET['code']);
-    echo $connect;
+    //$connect = file_get_contents('http://'.$_GET['server'].':31804/connect/confirm.php?client='.$_SERVER['SERVER_ADDR'].'&name='.$_GET['name'].'&code='.$_GET['code']);
+
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL,'http://'.$_GET['server'].':31804/connect/confirm.php');
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, "client=".$_SERVER['SERVER_ADDR']."&name=".$_GET['name']."&code=".$_GET['code']);
+    // Receive server response ...
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    $server_output = curl_exec($ch);
+
+    curl_close ($ch);
     ?>
     <html>
       <head>
