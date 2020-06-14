@@ -43,3 +43,7 @@ systemctl start piscreen-client-apiserver.service
 echo "Removing tmp files"
 cd ../../
 rm -rf piscreen-server-update
+
+echo "Rebooting in 10 seconds"
+sleep 10
+reboot
