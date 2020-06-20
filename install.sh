@@ -15,6 +15,9 @@ apt -y install --no-install-recommends xserver-xorg x11-xserver-utils xinit open
 echo "Removing unnessesary packages"
 apt -y autoremove
 
+echo "Installing python packages"
+pip install -r requirements.txt
+
 echo "Removing default apache config"
 rm /etc/apache2/ports.conf
 rm /etc/apache2/sites-enabled/000-default.conf
@@ -28,12 +31,7 @@ mv /home/pi/piscreen-server/webserver/localserver /var/www
 mv /home/pi/piscreen-server/webserver/apiserver /var/www
 
 echo "Setting up files"
-mkdir /var/piscreen-client
-mkdir /var/piscreen-client/data
-mkdir /var/piscreen-client/data/players
-mkdir /var/piscreen-client/scripts
-mkdir /var/piscreen-client/data/serverfiles
-touch /var/piscreen-client/data/securitycode
+mv /home/pi/piscreen-client/dist/piscreen-client /var
 
 echo "Restarting apache"
 systemctl restart apache2
