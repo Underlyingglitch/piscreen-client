@@ -2,7 +2,7 @@
 
 class Server {
 
-  private $datapath = "../../../dist/data";
+  private $datapath = "../../../piscreen-client/data";
   private $securitycode;
 
   public $connect_name;
@@ -10,12 +10,12 @@ class Server {
   public $server_location;
 
   public function __construct() {
-    $this->securitycode = file_get_contents("/home/pi/piscreen-client/dist/data/securitycode");
+    $this->securitycode = file_get_contents("/var/piscreen-client/data/securitycode");
   }
 
   function connect() {
     $data = array("hostname" => $this->server_location, "is_loaded" => 0);
-    file_put_contents("/home/pi/piscreen-client/dist/data/serverconn.json", json_encode($data));
+    file_put_contents("/var/piscreen-client/data/serverconn.json", json_encode($data));
     return true;
   }
 

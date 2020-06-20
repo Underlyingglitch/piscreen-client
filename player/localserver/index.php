@@ -6,9 +6,9 @@ system("ping -c 1 google.com", $response);
 echo "</div>";
 if($response == 0) {
 
-  if (file_exists("/home/pi/piscreen-client/dist/data/serverconn.json")) {
+  if (file_exists("/var/piscreen-client/data/serverconn.json")) {
     //Getting local config file
-    $json = file_get_contents("/home/pi/piscreen-client/dist/data/serverconn.json");
+    $json = file_get_contents("/var/piscreen-client/data/serverconn.json");
     $array = json_decode($json, true);
 
     if ($array['is_loaded'] === 0) {
@@ -25,13 +25,13 @@ if($response == 0) {
 
     //Security code
     //Check if code is present
-    if (file_get_contents("/home/pi/piscreen-client/dist/data/securitycode") != "") {
+    if (file_get_contents("/var/piscreen-client/data/securitycode") != "") {
       //Get code from file and display to page
-      $code = file_get_contents("/home/pi/piscreen-client/dist/data/securitycode");
+      $code = file_get_contents("/var/piscreen-client/data/securitycode");
     } else {
       //Generate code and put in file
       $code = mt_rand(100000, 999999);
-      file_put_contents("/home/pi/piscreen-client/dist/data/securitycode", $code);
+      file_put_contents("/var/piscreen-client/data/securitycode", $code);
     }
 
     //Setting page variables
