@@ -8,10 +8,32 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 echo "Installing packages"
-apt-get -y update
-apt-get -y install php lightdm plymouth plymouth-themes pix-plym-splash
-apt-get -y install --no-install-recommends xserver-xorg x11-xserver-utils xinit openbox chromium-browser
-apt-get -y install unclutter dos2unix
+apt -y update
+apt -y install php libapache2-mod-php lightdm plymouth plymouth-themes pix-plym-splash unclutter dos2unix
+apt -y install --no-install-recommends xserver-xorg x11-xserver-utils xinit openbox chromium-browser
+
+echo "Removing unnessesary packages"
+apt -y autoremove
+
+echo "Removing default apache config"
+rm /etc/apache2/ports.conf
+rm /etc/apache2/sites-enabled/000-default.conf
+
+echo "Copying new configuration"
+mv /home/pi/piscreen-client/dist/apache/000-default.conf /etc/apache2/sites-enabled/000-default.conf
+mv /home/pi/piscreen-client/dist/apache/ports.conf /etc/apache2/ports.conf
+
+echo "Copying webfiles to new location"
+mv /home/pi/piscreen-server/webserver/localserver /var/www
+mv /home/pi/piscreen-server/webserver/apiserver /var/www
+
+echo "Setting up files"
+mkdir /var/piscreen-client
+mkdir /var/piscreen-client/data
+touch /var/piscreen-client/data/securitycode
+
+echo "Restarting apache"
+systemctl restart apache2
 
 echo "Setting raspi-config variables"
 raspi-config nonint do_hostname piscreenclient
@@ -22,13 +44,6 @@ raspi-config nonint do_memory_split 256
 echo "Setting timezone"
 rm /etc/localtime
 ln /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime
-
-echo "Removing unnessesary packages"
-apt -y autoremove
-
-echo "Removing apache2"
-apt-get -y remove apache2
-apt-get -y purge apache2
 
 echo "Installing bootscreen"
 mv /home/pi/piscreen-client/dist/files/splash.png /usr/share/plymouth/themes/pix
@@ -46,27 +61,6 @@ echo "Installing startup script"
 rm /etc/xdg/openbox/autostart
 mv /home/pi/piscreen-client/dist/files/autostart /etc/xdg/openbox/autostart
 dos2unix /etc/xdg/openbox/autostart
-
-echo "Setting up files"
-mkdir /home/pi/piscreen-client/dist/data
-touch /home/pi/piscreen-client/dist/data/securitycode
-
-echo "Creating services"
-mv dist/scripts/piscreen-client-localserver.service /lib/systemd/system/piscreen-client-localserver.service
-mv dist/scripts/piscreen-client-apiserver.service /lib/systemd/system/piscreen-client-apiserver.service
-chmod 644 /lib/systemd/system/piscreen-client-localserver.service
-chmod 644 /lib/systemd/system/piscreen-client-apiserver.service
-chmod +x /home/pi/piscreen-client/player/localserver.py
-chmod +x /home/pi/piscreen-client/player/apiserver.py
-
-echo "Reloading startup sequence"
-systemctl daemon-reload
-
-echo "Starting services"
-systemctl enable piscreen-client-localserver.service
-systemctl enable piscreen-client-apiserver.service
-systemctl start piscreen-client-localserver.service
-systemctl start piscreen-client-apiserver.service
 
 echo "Rebooting in 10 seconds"
 sleep 10
