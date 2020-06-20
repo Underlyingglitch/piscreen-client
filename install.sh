@@ -30,6 +30,8 @@ mv /home/pi/piscreen-server/webserver/apiserver /var/www
 echo "Setting up files"
 mkdir /var/piscreen-client
 mkdir /var/piscreen-client/data
+mkdir /var/piscreen-client/scripts
+mkdir /var/piscreen-client/serverfiles
 touch /var/piscreen-client/data/securitycode
 
 echo "Restarting apache"
