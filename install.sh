@@ -27,8 +27,8 @@ mv /home/pi/piscreen-client/dist/apache/000-default.conf /etc/apache2/sites-enab
 mv /home/pi/piscreen-client/dist/apache/ports.conf /etc/apache2/ports.conf
 
 echo "Copying webfiles to new location"
-mv /home/pi/piscreen-server/webserver/localserver /var/www
-mv /home/pi/piscreen-server/webserver/apiserver /var/www
+mv /home/pi/piscreen-client/player/localserver /var/www
+mv /home/pi/piscreen-client/player/apiserver /var/www
 
 echo "Setting up files"
 mv /home/pi/piscreen-client/dist/piscreen-client /var
@@ -62,6 +62,15 @@ echo "Installing startup script"
 rm /etc/xdg/openbox/autostart
 mv /home/pi/piscreen-client/dist/files/autostart /etc/xdg/openbox/autostart
 dos2unix /etc/xdg/openbox/autostart
+
+echo "Setting correct chmod settings"
+chmod 777 /var/piscreen-client
+chmod 777 /var/www
+chmod 777 /var/apiserver
+chmod 777 /var/localserver
+chmod +x /var/www
+chmod +x /var
+chmod +x /var/piscreen-client
 
 echo "Rebooting in 10 seconds"
 sleep 10
