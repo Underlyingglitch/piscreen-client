@@ -9,7 +9,7 @@ fi
 
 echo "Installing packages"
 apt -y update
-apt -y install php libapache2-mod-php lightdm plymouth plymouth-themes pix-plym-splash unclutter dos2unix
+apt -y install php7.3 curl php7.3-curl libapache2-mod-php lightdm plymouth plymouth-themes pix-plym-splash unclutter dos2unix
 apt -y install --no-install-recommends xserver-xorg x11-xserver-utils xinit openbox chromium-browser
 
 echo "Removing unnessesary packages"
@@ -64,13 +64,8 @@ mv /home/pi/piscreen-client/dist/files/autostart /etc/xdg/openbox/autostart
 dos2unix /etc/xdg/openbox/autostart
 
 echo "Setting correct chmod settings"
-chmod 777 /var/piscreen-client
-chmod 777 /var/www
-chmod 777 /var/www/apiserver
-chmod 777 /var/www/localserver
-chmod +x /var/www
-chmod +x /var
-chmod +x /var/piscreen-client
+chmod -R 777 /var/www
+chmod -R 777 /var/piscreen-client
 
 echo "Rebooting in 10 seconds"
 sleep 10
