@@ -15,9 +15,6 @@ if ($server->isCode()) {
   if ($server->connect()) {
     //Set response code to 200 OK
     http_response_code(200);
-    //Tell the user
-    $thisip = gethostbyname(gethostname());
-    //$connect = file_get_contents('http://'.$_GET['server'].':31804/connect/confirm.php?client='.$_SERVER['SERVER_ADDR'].'&name='.$_GET['name'].'&code='.$_GET['code']);
 
     $ch = curl_init();
 
