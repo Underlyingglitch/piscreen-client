@@ -67,6 +67,15 @@ echo "Setting correct chmod settings"
 chmod -R 777 /var/www
 chmod -R 777 /var/piscreen-client
 
+echo "Creating piscreen service"
+mv ~/piscreen-client/dist/files/piscreen.service lib/systemd/system/piscreen.service
+
+chmod 644 /lib/systemd/system/piscreen.service
+chmod +x /var/piscreen-client/scripts/piscreen.sh
+sudo systemctl daemon-reload
+sudo systemctl enable piscreen.service
+sudo systemctl start piscreen.service
+
 echo "Rebooting in 10 seconds"
 sleep 10
 reboot
