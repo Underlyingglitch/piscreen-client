@@ -66,8 +66,8 @@ dos2unix /etc/xdg/openbox/autostart
 echo "Setting correct chmod settings"
 chmod 777 /var/piscreen-client
 chmod 777 /var/www
-chmod 777 /var/apiserver
-chmod 777 /var/localserver
+chmod 777 /var/www/apiserver
+chmod 777 /var/www/localserver
 chmod +x /var/www
 chmod +x /var
 chmod +x /var/piscreen-client
