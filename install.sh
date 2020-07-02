@@ -68,7 +68,7 @@ chmod -R 777 /var/www
 chmod -R 777 /var/piscreen-client
 
 echo "Creating piscreen service"
-mv ~/piscreen-client/dist/files/piscreen.service lib/systemd/system/piscreen.service
+mv /home/pi/piscreen-client/dist/files/piscreen.service /lib/systemd/system/piscreen.service
 
 chmod 644 /lib/systemd/system/piscreen.service
 chmod +x /var/piscreen-client/scripts/piscreen.sh
