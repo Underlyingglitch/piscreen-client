@@ -51,17 +51,21 @@ mv /home/pi/piscreen-client/dist/files/splash.png /usr/share/plymouth/themes/pix
 rm /boot/config.txt
 mv /home/pi/piscreen-client/dist/files/config.txt /boot/config.txt
 dos2unix /boot/config.txt
+chmod 755 /boot/config.txt
 rm /usr/share/plymouth/themes/pix/pix.script
 mv /home/pi/piscreen-client/dist/files/pix.script /usr/share/plymouth/themes/pix/pix.script
 dos2unix /usr/share/plymouth/themes/pix/pix.script
+chmod 644 /usr/share/plymouth/themes/pix/pix.script
 rm /boot/cmdline.txt
 mv /home/pi/piscreen-client/dist/files/cmdline.txt /boot/cmdline.txt
 dos2unix /boot/cmdline.txt
+chmod 755 /boot/cmdline.txt
 
 echo "Installing startup script"
 rm /etc/xdg/openbox/autostart
 mv /home/pi/piscreen-client/dist/files/autostart /etc/xdg/openbox/autostart
 dos2unix /etc/xdg/openbox/autostart
+chmod 755 /etc/xdg/openbox/autostart
 
 echo "Setting correct chmod settings"
 chmod -R 777 /var/www
