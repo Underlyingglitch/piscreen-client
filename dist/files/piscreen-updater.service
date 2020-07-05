@@ -1,0 +1,11 @@
+[Unit]
+Description=PiScreen Updater
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python /var/piscreen-client/scripts/update.py
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target

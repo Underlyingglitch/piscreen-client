@@ -71,6 +71,19 @@ echo "Setting correct chmod settings"
 chmod -R 777 /var/www
 chmod -R 777 /var/piscreen-client
 
+echo "Creating services"
+mv /home/pi/piscreen-client/dist/files/piscreen.service /lib/systemd/system/piscreen.service
+mv /home/pi/piscreen-client/dist/files/piscreen-updater.service /lib/systemd/system/piscreen-updater.service
+chmod 644 /lib/systemd/system/piscreen.service
+chmod 644 /lib/systemd/system/piscreen-updater.service
+chmod +x /var/piscreen-client/scripts/piscreen.py
+chmod +x /var/piscreen-client/scripts/update.py
+systemctl daemon-reload
+systemctl enable piscreen.service
+systemctl enable piscreen-updater.service
+systemctl start piscreen.service
+systemctl start piscreen-updater.service
+
 echo "Rebooting in 10 seconds"
 sleep 10
 reboot
