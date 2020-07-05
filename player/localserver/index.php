@@ -14,6 +14,8 @@ if($response == 0) {
     if ($array['is_loaded'] === 0) {
       $server_ip = $array['hostname'];
       include "success.php";
+    } else if ($array['is_loaded'] === 1) {
+      include "player.php";
     } else {
       include "failed.php";
     }

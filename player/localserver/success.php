@@ -1,3 +1,13 @@
+<?php
+
+$content = json_decode(file_get_contents("/var/piscreen-client/data/serverconn.json"), true);
+
+$content['is_loaded'] = 1;
+
+file_put_contents("var/piscreen-client/data/serverconn.json", json_encode($content));
+
+?>
+
 <html>
   <head>
     <meta charset="utf-8">
@@ -43,6 +53,20 @@
       <i class="fas fa-check-circle fa-7x icon"></i>
       <h1 class="title">Geslaagd</h1>
       <p class="text">De client heeft verbinding gemaakt met de server: <?php echo $server_ip; ?></p>
+      <div id="countdown"></div>
     </div>
+    <script>
+    var timeleft = 20;
+    var downloadTimer = setInterval(function(){
+      if(timeleft <= 0){
+        clearInterval(downloadTimer);
+        document.getElementById("countdown").innerHTML = "Doorsturen....";
+        window.location.replace("player.php");
+      } else {
+        document.getElementById("countdown").innerHTML = "Scherm sluit over: "+timeleft+" seconden";
+      }
+      timeleft -= 1;
+    }, 1000);
+    </script>
   </body>
 </html>
