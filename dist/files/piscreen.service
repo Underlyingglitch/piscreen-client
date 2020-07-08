@@ -4,7 +4,7 @@ After=multi-user.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/python /var/piscreen-client/scripts/piscreen.py
+ExecStart=/usr/bin/python3 /var/piscreen-client/scripts/piscreen.py
 Restart=on-abort
 
 [Install]
