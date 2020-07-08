@@ -9,14 +9,14 @@ fi
 
 echo "Installing packages"
 apt -y update
-apt -y install php7.3 curl php7.3-curl libapache2-mod-php lightdm plymouth plymouth-themes pix-plym-splash unclutter dos2unix
+apt -y install python3-pip php7.3 curl php7.3-curl libapache2-mod-php lightdm plymouth plymouth-themes pix-plym-splash unclutter dos2unix
 apt -y install --no-install-recommends xserver-xorg x11-xserver-utils xinit openbox chromium-browser
 
 echo "Removing unnessesary packages"
 apt -y autoremove
 
 echo "Installing python packages"
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 
 echo "Removing default apache config"
 rm /etc/apache2/ports.conf
