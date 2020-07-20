@@ -68,7 +68,7 @@ $playlistlength = count($current['media']);
         $('.main').html('');
         $('.main').load('includes/playlist/'+current+'.html');
         setTimeout(function(){
-          if (current == length) {
+          if (current == length-1) {
             current = 0;
           } else {
             current++;
