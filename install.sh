@@ -67,6 +67,11 @@ mv /home/pi/piscreen-client/dist/files/autostart /etc/xdg/openbox/autostart
 dos2unix /etc/xdg/openbox/autostart
 chmod 755 /etc/xdg/openbox/autostart
 
+echo "Changing config files"
+rm /etc/chromium-browser/default
+mv /home/pi/piscreen-client/dist/files/default /etc/chromium-browser/default
+chmod 644 /etc/chromium-browser/default
+
 echo "Setting correct chmod settings"
 chmod -R 777 /var/www
 chmod -R 777 /var/piscreen-client
