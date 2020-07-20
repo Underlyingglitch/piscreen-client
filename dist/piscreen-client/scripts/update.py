@@ -1,34 +1,46 @@
-import requests, json
+import requests, json, hashlib, os, time
 
-# Get local server connection
-with open('/var/piscreen-client/data/serverconn.json') as f:
-    connection = json.load(f)
-f.close()
+while True:
+    time.sleep(3)
 
-with open('/var/piscreen-client/data/securitycode') as f:
-    securitycode = f.read()
-f.close()
+    # Get local server connection
+    with open('/var/piscreen-client/data/serverconn.json') as f:
+        connection = json.loads(f.read())
+    f.close()
 
-# Get update check from connected server
-response = json.load(requests.get('http://{}:31804/player/checkupdate.php?code={}'.format(connection['hostname'], securitycode)).text)
+    with open('/var/piscreen-client/data/securitycode') as f:
+        securitycode = f.read()
+    f.close()
 
-# Get current playlist
-with open('/var/piscreen-client/data/serverfiles/current.json') as f:
-    data = json.load(f)
+    with open('/var/piscreen-client/data/serverfiles/current.json') as f:
+        file = f.read().replace("\'", '').replace(" ", "")
+        current = hashlib.md5(file.encode()).hexdigest()
+    f.close()
 
-    # Check if playlist is up to date
-    if (response['last_updated'] != data['last_updated']):
-        # Update local files with new server files
+    # Get update check from connected server
+    response = requests.get('http://{}:31804/player/checkupdate.php?code={}&hash={}'.format(connection['hostname'], securitycode, current)).text
+
+    if (response == "true"):
+        # Get current playlist
         # Get new playlist details
-        details = json.load(requests.get('http://{}:31804/player/getlastplaylist.php?code={}'.format(connection['hostname'], securitycode)).text)
+        details = requests.get('http://{}:31804/player/getplaylist.php?code={}'.format(connection['hostname'], securitycode)).text
 
-        # Set last updated to new date
-        data['last_updated'] = response['last_updated']
+        details = details.rstrip("\n")
 
-        # Create new local playlist
-        data['slides'] = details['data']
+        if details == "empty":
+            #no playlist
+            os.remove('/var/piscreen-client/data/serverfiles/current.json')
 
-        # Write new data to file
-        f.write(json.dumps(data))
+            with open('/var/piscreen-client/data/serverfiles/current.json', 'w+') as f:
+                f.write('[]')
+            os.system('touch /var/www/localserver/update.command')
+        else:
+            details = json.loads(details)
 
-        print(f.read())
+            os.remove('/var/piscreen-client/data/serverfiles/current.json')
+
+            with open('/var/piscreen-client/data/serverfiles/current.json', 'w+') as f:
+                f.write(json.dumps(details))
+            os.system('touch /var/www/localserver/update.command')
+    else:
+        print('No update!')
