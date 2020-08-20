@@ -89,6 +89,9 @@ systemctl enable piscreen-updater.service
 systemctl start piscreen.service
 systemctl start piscreen-updater.service
 
+mv /home/pi/piscreen-client/CURRENT_VERSION /var/piscreen-client/data/CURRENT_VERSION
+
+
 echo "Rebooting in 10 seconds"
 sleep 10
 reboot

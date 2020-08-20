@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Installing piscreen-client"
+echo "Updating piscreen-client"
 
 if [[ $EUID -ne 0 ]]; then
   echo "This script must be run as root" 1>&2
@@ -10,15 +10,14 @@ fi
 echo "Installing packages"
 apt -y update
 apt -y upgrade
+apt -y install python3-pip php7.3 curl php7.3-curl libapache2-mod-php lightdm plymouth plymouth-themes pix-plym-splash unclutter dos2unix
+apt -y install --no-install-recommends xserver-xorg x11-xserver-utils xinit openbox chromium-browser
 
 echo "Removing unnessesary packages"
 apt -y autoremove
 
-echo "Downloading new data"
-git clone https://github.com/underlyingglitch/piscreen-client update
-
 echo "Installing python packages"
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 
 echo "Removing default apache config"
 rm /etc/apache2/ports.conf
@@ -28,17 +27,9 @@ echo "Copying new configuration"
 mv /home/pi/piscreen-client/dist/apache/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 mv /home/pi/piscreen-client/dist/apache/ports.conf /etc/apache2/ports.conf
 
-echo "Deleting previous version"
-rm -rf /var/www/localserver
-rm -rf /var/www/apiserver
-rm -rf /var/piscreen-client
-
 echo "Copying webfiles to new location"
 mv /home/pi/piscreen-client/player/localserver /var/www
 mv /home/pi/piscreen-client/player/apiserver /var/www
-
-echo "Setting up files"
-mv /home/pi/piscreen-client/dist/piscreen-client /var
 
 echo "Restarting apache"
 systemctl restart apache2
@@ -54,38 +45,49 @@ rm /etc/localtime
 ln /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime
 
 echo "Installing bootscreen"
-rm /usr/share/plymouth/themes/pix
-mv /home/pi/piscreen-client/update/dist/files/splash.png /usr/share/plymouth/themes/pix
-
+mv /home/pi/piscreen-client/dist/files/splash.png /usr/share/plymouth/themes/pix
 rm /boot/config.txt
-mv /home/pi/piscreen-client/update/dist/files/config.txt /boot/config.txt
+mv /home/pi/piscreen-client/dist/files/config.txt /boot/config.txt
 dos2unix /boot/config.txt
-
+chmod 755 /boot/config.txt
 rm /usr/share/plymouth/themes/pix/pix.script
-mv /home/pi/piscreen-client/update/dist/files/pix.script /usr/share/plymouth/themes/pix/pix.script
+mv /home/pi/piscreen-client/dist/files/pix.script /usr/share/plymouth/themes/pix/pix.script
 dos2unix /usr/share/plymouth/themes/pix/pix.script
-
+chmod 644 /usr/share/plymouth/themes/pix/pix.script
 rm /boot/cmdline.txt
-mv /home/pi/piscreen-client/update/dist/files/cmdline.txt /boot/cmdline.txt
+mv /home/pi/piscreen-client/dist/files/cmdline.txt /boot/cmdline.txt
 dos2unix /boot/cmdline.txt
+chmod 755 /boot/cmdline.txt
 
 echo "Installing startup script"
 rm /etc/xdg/openbox/autostart
 mv /home/pi/piscreen-client/dist/files/autostart /etc/xdg/openbox/autostart
 dos2unix /etc/xdg/openbox/autostart
+chmod 755 /etc/xdg/openbox/autostart
+
+echo "Changing config files"
+rm /etc/chromium-browser/default
+mv /home/pi/piscreen-client/dist/files/default /etc/chromium-browser/default
+chmod 644 /etc/chromium-browser/default
 
 echo "Setting correct chmod settings"
 chmod -R 777 /var/www
 chmod -R 777 /var/piscreen-client
 
-echo "Creating piscreen service"
-mv ~/piscreen-client/dist/files/piscreen.service lib/systemd/system/piscreen.service
-
+echo "Creating services"
+mv /home/pi/piscreen-client/dist/files/piscreen.service /lib/systemd/system/piscreen.service
+mv /home/pi/piscreen-client/dist/files/piscreen-updater.service /lib/systemd/system/piscreen-updater.service
 chmod 644 /lib/systemd/system/piscreen.service
-chmod +x /var/piscreen-client/scripts/piscreen.sh
-sudo systemctl daemon-reload
-sudo systemctl enable piscreen.service
-sudo systemctl start piscreen.service
+chmod 644 /lib/systemd/system/piscreen-updater.service
+chmod +x /var/piscreen-client/scripts/piscreen.py
+chmod +x /var/piscreen-client/scripts/update.py
+systemctl daemon-reload
+systemctl enable piscreen.service
+systemctl enable piscreen-updater.service
+systemctl start piscreen.service
+systemctl start piscreen-updater.service
+
+mv /home/pi/piscreen-client/CURRENT_VERSION /var/piscreen-client/data/CURRENT_VERSION
 
 echo "Rebooting in 10 seconds"
 sleep 10
