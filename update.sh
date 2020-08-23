@@ -27,6 +27,11 @@ echo "Copying new configuration"
 mv /home/pi/piscreen-client/dist/apache/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 mv /home/pi/piscreen-client/dist/apache/ports.conf /etc/apache2/ports.conf
 
+echo "Removing old files"
+rm -rf /var/www/apiserver
+rm -rf /var/www/localserver
+rm -rf /home/pi/piscreen-client
+
 echo "Copying webfiles to new location"
 mv /home/pi/piscreen-client/player/localserver /var/www
 mv /home/pi/piscreen-client/player/apiserver /var/www
