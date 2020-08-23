@@ -58,16 +58,22 @@ $playlistlength = count($current['media']);
       });
     }
 
+    var shown = 0
+
     function checkConnection() {
       $.get('connectioncheck.php', function(data){
         if (data == "offline") {
-          var update = $.notify({
-            message: 'Geen verbinding met internet'
-          },
-          {
-            delay: 0,
-            allow_dismiss: false
-          });
+          if (shown != 1) {
+            var update = $.notify({
+              message: 'Geen verbinding met internet',
+              type: 'warning'
+            },
+            {
+              delay: 0,
+              allow_dismiss: false
+            });
+            shown = 1
+          }
         }
       });
     }
