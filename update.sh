@@ -23,6 +23,9 @@ echo "Removing default apache config"
 rm /etc/apache2/ports.conf
 rm /etc/apache2/sites-enabled/000-default.conf
 
+echo "Copying playlist files to tmp location"
+mv /var/www/localserver/includes/playlist /var/tmp
+
 echo "Copying new configuration"
 mv /home/pi/piscreen-client/dist/apache/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 mv /home/pi/piscreen-client/dist/apache/ports.conf /etc/apache2/ports.conf
@@ -34,6 +37,7 @@ rm -rf /var/www/localserver
 echo "Copying webfiles to new location"
 mv /home/pi/piscreen-client/player/localserver /var/www
 mv /home/pi/piscreen-client/player/apiserver /var/www
+mv /var/tmp/playlist /var/www/localserver/includes
 
 echo "Restarting apache"
 systemctl restart apache2
