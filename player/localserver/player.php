@@ -13,6 +13,7 @@ $playlistlength = count($current['media']);
   <title>PiScreen - Player</title>
 
   <link rel="stylesheet" href="vendor/fontawesome/css/all.css">
+  <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
 
   <!-- Fonts -->
   <link rel="stylesheet" href="css/roboto.css">
@@ -42,6 +43,11 @@ $playlistlength = count($current['media']);
     <div class="main" align="center"></div>
   </body>
 
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="vendor/bootstrap-notify/bootstrap-notify.min.js"></script>
+
   <script>
   $(document).ready(function(){
     function checkUpdate() {
@@ -52,8 +58,23 @@ $playlistlength = count($current['media']);
       });
     }
 
+    function checkConnection() {
+      $.get('connectioncheck.php', function(data){
+        if (data == "offline") {
+          var update = $.notify({
+            message: 'Geen verbinding met internet'
+          },
+          {
+            delay: 0,
+            allow_dismiss: false
+          });
+        }
+      });
+    }
+
     setInterval(function(){
       checkUpdate();
+      checkConnection();
     }, 2000);
 
     var length = <?php echo $playlistlength; ?>;

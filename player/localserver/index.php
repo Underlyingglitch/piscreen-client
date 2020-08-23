@@ -42,7 +42,11 @@ if($response == 0) {
     include "start.php";
   }
 } else {
-  include "noconn.php";
+  if (file_exists("/var/piscreen-client/data/serverconn.json")) {
+    include "player.php";
+  } else {
+    include "noconn.php";
+  }
 }
 
 ?>

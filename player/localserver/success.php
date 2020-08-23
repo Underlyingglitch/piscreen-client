@@ -4,7 +4,7 @@ $content = json_decode(file_get_contents("/var/piscreen-client/data/serverconn.j
 
 $content['is_loaded'] = 1;
 
-file_put_contents("var/piscreen-client/data/serverconn.json", json_encode($content));
+file_put_contents("/var/piscreen-client/data/serverconn.json", json_encode($content));
 
 ?>
 

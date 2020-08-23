@@ -6,6 +6,8 @@
 
     <link rel="stylesheet" href="vendor//fontawesome/css/all.css">
 
+    <meta http-equiv="refresh" content="5;url=index.php" />
+
     <!-- Fonts -->
     <link href="css/roboto.css" rel="stylesheet">
 
@@ -44,7 +46,7 @@
     <div class="main" align="center">
       <i class="fas fa-exclamation-triangle fa-7x icon"></i>
       <h1 class="title">Geen verbinding</h1>
-      <p class="text">De client heeft geen verbinding met het internet. Controleer de verbinding!</p>
+      <p class="text">De client heeft geen verbinding met het internet. Controleer de verbinding! Zodra de verbinding is hersteld zal het proces doorgaan.</p>
     </div>
   </body>
 </html>
