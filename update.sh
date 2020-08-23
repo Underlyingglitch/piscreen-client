@@ -30,7 +30,6 @@ mv /home/pi/piscreen-client/dist/apache/ports.conf /etc/apache2/ports.conf
 echo "Removing old files"
 rm -rf /var/www/apiserver
 rm -rf /var/www/localserver
-rm -rf /home/pi/piscreen-client
 
 echo "Copying webfiles to new location"
 mv /home/pi/piscreen-client/player/localserver /var/www
@@ -81,6 +80,8 @@ systemctl start piscreen.service
 systemctl start piscreen-updater.service
 
 mv /home/pi/piscreen-client/CURRENT_VERSION /var/piscreen-client/data/CURRENT_VERSION
+
+rm -rf /home/pi/piscreen-client
 
 echo "Rebooting in 10 seconds"
 sleep 10
