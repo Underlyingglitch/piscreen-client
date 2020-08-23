@@ -20,7 +20,13 @@ def resetCheck():
 
 def updatecheck():
     #Check for updates
-    newversion = requests.get('https://raw.githubusercontent.com/Underlyingglitch/piscreen-client/master/CURRENT_VERSION').text.strip()
+    try:
+        newversion = requests.get('https://raw.githubusercontent.com/Underlyingglitch/piscreen-client/master/CURRENT_VERSION').text.strip()
+    except requests.exceptions.ConnectionError:
+        with open('/var/piscreen-client/data/CURRENT_VERSION') as f:
+            newversion = f.read().strip()
+        f.close()
+
     with open('/var/piscreen-client/data/CURRENT_VERSION') as f:
         currentversion = f.read().strip()
     f.close()
