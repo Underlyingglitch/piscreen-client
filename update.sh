@@ -17,7 +17,7 @@ echo "Removing unnessesary packages"
 apt -y autoremove
 
 echo "Installing python packages"
-pip3 install -r requirements.txt
+pip3 install -r /home/pi/piscreen-client/requirements.txt
 
 echo "Removing default apache config"
 rm /etc/apache2/ports.conf
@@ -33,12 +33,6 @@ mv /home/pi/piscreen-client/player/apiserver /var/www
 
 echo "Restarting apache"
 systemctl restart apache2
-
-echo "Setting raspi-config variables"
-raspi-config nonint do_hostname piscreenclient
-raspi-config nonint do_boot_behaviour B4
-raspi-config nonint do_overscan 0
-raspi-config nonint do_memory_split 256
 
 echo "Setting timezone"
 rm /etc/localtime
@@ -58,12 +52,6 @@ rm /boot/cmdline.txt
 mv /home/pi/piscreen-client/dist/files/cmdline.txt /boot/cmdline.txt
 dos2unix /boot/cmdline.txt
 chmod 755 /boot/cmdline.txt
-
-echo "Installing startup script"
-rm /etc/xdg/openbox/autostart
-mv /home/pi/piscreen-client/dist/files/autostart /etc/xdg/openbox/autostart
-dos2unix /etc/xdg/openbox/autostart
-chmod 755 /etc/xdg/openbox/autostart
 
 echo "Changing config files"
 rm /etc/chromium-browser/default

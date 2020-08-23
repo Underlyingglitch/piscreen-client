@@ -16,7 +16,7 @@ echo "Removing unnessesary packages"
 apt -y autoremove
 
 echo "Installing python packages"
-pip3 install -r requirements.txt
+pip3 install -r /home/pi/piscreen-client/requirements.txt
 
 echo "Removing default apache config"
 rm /etc/apache2/ports.conf
