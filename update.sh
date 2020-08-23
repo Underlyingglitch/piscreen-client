@@ -24,7 +24,7 @@ rm /etc/apache2/ports.conf
 rm /etc/apache2/sites-enabled/000-default.conf
 
 echo "Copying playlist files to tmp location"
-mv /var/www/localserver/includes/playlist /var/tmp
+mv /var/www/localserver/includes/playlist /var
 
 echo "Copying new configuration"
 mv /home/pi/piscreen-client/dist/apache/000-default.conf /etc/apache2/sites-enabled/000-default.conf
@@ -37,7 +37,8 @@ rm -rf /var/www/localserver
 echo "Copying webfiles to new location"
 mv /home/pi/piscreen-client/player/localserver /var/www
 mv /home/pi/piscreen-client/player/apiserver /var/www
-mv /var/tmp/playlist /var/www/localserver/includes
+mv /var/playlist /var/www/localserver/includes
+mv /home/pi/piscreen-client/dist/piscreen-client/scripts /var/piscreen-client
 
 echo "Restarting apache"
 systemctl restart apache2
