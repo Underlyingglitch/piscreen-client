@@ -1,4 +1,6 @@
 # piscreen-client
+## Project Ended
+Due to other projects and tasks I can no longer maintain this project. This project and the server package will become archived. If you want to restart this project, or want to use (part of) the code, please contact me on Discord (Underlyingglitch#6612)
 
 ## About
 WARNING!
